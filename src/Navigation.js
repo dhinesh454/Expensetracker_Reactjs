@@ -1,10 +1,17 @@
 import React from "react";
 import { Container, Navbar ,Nav} from "react-bootstrap";
-// import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { TbLogout } from "react-icons/tb";
 
 
 
 const Navigation = () => {
+    const history = useHistory(); 
+    const logoutHandler = () => {
+        localStorage.clear();
+        history.push('/')
+    }
+
     return(
         <>
             <Navbar bg='dark' expand='lg' variant='dark'>
@@ -14,6 +21,8 @@ const Navigation = () => {
                         <Nav.Link className="text-warning me-5 cursor-pointer">Home</Nav.Link>
                         <Nav.Link className="text-warning me-5 cursor-pointer">Products</Nav.Link>
                         <Nav.Link className="text-warning me-5 cursor-pointer">Contact</Nav.Link>
+                        <Nav.Link onClick={logoutHandler} className="text-warning me-5 cursor-pointer"><span><TbLogout /></span>Logout</Nav.Link>
+
                     </Nav>
                 </Container>
             </Navbar>

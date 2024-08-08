@@ -4,7 +4,9 @@ import LoginPage from './components/Pages/LoginPage';
 import SignupPage from './components/Pages/SignupPage';
 import ExpenseHomePage from './components/Pages/ExpenseHomePage';
 import UpdateProfile from './components/Users/UpdateProfile';
-import EmailPage from './components/Pages/EmailPage';
+import ProfilePage from './components/Pages/ProfilePage';
+import ForgotPassword from './components/Users/ForgotPassword';
+
 
 
 function App() {
@@ -28,10 +30,15 @@ function App() {
         <Route path='/updateprofile'>
              <UpdateProfile/>
         </Route>
-        
-        <Route path='/verifyemail'>
-             <EmailPage/>
+
+        <Route path='/profilepage'>
+           <ProfilePage/>
         </Route>
+
+        <Route path='/forgotpassword'>
+           <ForgotPassword/>
+        </Route>
+        
       </Switch>
     </Router>
     

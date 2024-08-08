@@ -7,9 +7,15 @@ import { useHistory } from "react-router-dom";
 
 
 const Login = () => {
+
+
     const emailidRef = useRef();
     const passwordRef = useRef();
     const history = useHistory();
+
+
+
+    
 
 
     async function onSigninHandler(event){
@@ -46,6 +52,10 @@ const Login = () => {
         }
 
 
+
+       
+        
+
     }
     return(
         <div className={classes.background}>
@@ -61,6 +71,7 @@ const Login = () => {
                     <Form.Group as={Col}>
                         <Form.Label className="fw-bold fst-italic ">Password</Form.Label>
                         <Form.Control type="password" placeholder="Enter your password" ref={passwordRef}/>
+                        <Link className={classes.forgotpassword} to='/forgotpassword'>ForgotPassword?</Link>
                     </Form.Group>
                 </Row>
                 

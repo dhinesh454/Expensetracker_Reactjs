@@ -1,24 +1,45 @@
 import React, { useEffect,useState } from "react";
 import { Button, Image } from "react-bootstrap";
-import { Link,useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const ExpenseHome = () =>{
-
+    const history = useHistory();
 
     const [profilestate,setProfilestate]=useState(true);
     const [profile,setProfile] = useState(null);
     const [emailVerified,setemailVerified] = useState(true);
-    const history = useHistory();
-
+   
     console.log(profile);
     useEffect(()=>{
         getUserProfile();
     },[]);
 
 
-    const emailverifyHandler = () => {
-        history.push('/verifyemail')
+    const emailverifyHandler = async () => {
+      try {
+          const payload ={
+              requestType:"VERIFY_EMAIL",
+              idToken:localStorage.getItem('token')
+          }
+          const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCadqOoJjHC-xCAKq19vBPdxjuzR1XcGFk',{
+              method:'POST',
+              body:JSON.stringify(payload),
+              headers:{
+                  'Content-Type': 'application/json'
+              }
+          });
+  
+          if(!res.ok){
+              throw new Error(`Error:${res.statusText}`)
+          }
+          const data = await res.json();
+          console.log('Verification email sent successfully:', data);
+          alert('Check Your Email and verify ..login Again');
+          history.push('/')
+      } catch (error) {
+          console.error('Error sending verification email:', error);
+      }
     }
 
     async function getUserProfile(){
