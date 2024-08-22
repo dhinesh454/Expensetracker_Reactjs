@@ -3,10 +3,14 @@ import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import classes from './Signup.module.css';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { authActions } from "../../store/auth";
+import { useDispatch } from "react-redux";
 
 
 
 const Login = () => {
+    const dispatch = useDispatch();
+    
 
 
     const emailidRef = useRef();
@@ -44,7 +48,8 @@ const Login = () => {
             const data = await res.json();
             console.log(data)
             localStorage.setItem('token',data.idToken);
-            localStorage.setItem('localId',data.localId)
+            localStorage.setItem('localId',data.localId);
+            dispatch(authActions.loginHandler({token:data.idToken,localId:data.localId}))
             history.replace('/expense')
         } catch (error) {
             alert(`Authentication failed ${error}`)

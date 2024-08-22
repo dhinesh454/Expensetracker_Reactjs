@@ -1,0 +1,7 @@
+.expenses{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 1rem;
+    background-color: rgb(96, 96, 215);
+}
