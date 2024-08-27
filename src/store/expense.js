@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
-const initialExpenseState={expenses:[]};
+const initialExpenseState={expenses:[],isDarkTheme:false};
 
 const expenseSlice = createSlice({
     name:'expenses',
@@ -34,6 +34,10 @@ const expenseSlice = createSlice({
                 exp.id === action.payload.id ? action.payload : exp)
 
 
+        },
+
+        darkModeToogle  (state){
+            state.isDarkTheme = !state.isDarkTheme
         }
     }
 })

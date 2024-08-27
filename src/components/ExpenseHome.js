@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ExpenseForm from "./ExpenseForm";
+// import { expenseAction } from "../store/expense";
+import { useSelector } from "react-redux";
+import Premium from "./Premium";
 
 
 
@@ -10,7 +13,10 @@ const ExpenseHome = () => {
     const history = useHistory();
     const [profile, setProfile] = useState({ isComplete: true, data: null });
     const [emailVerified, setEmailVerified] = useState(true);
+    const expense = useSelector((state)=>state.expenses.expenses);
 
+    const total = expense.reduce((acc,exp)=> acc+parseInt(exp.amount),0);
+    console.log(total,'--------->total')
     useEffect(() => {
         getUserProfile();
     }, []);
@@ -81,7 +87,7 @@ const ExpenseHome = () => {
 
     return (
         <>
-            <div className="d-flex align-items-center justify-content-between p-2 border-bottom 1px solid black">
+            <div className="d-flex align-items-center justify-content-between p-2 border-bottom 1px solid black m-1">
                 <p className="fst-italic fw-bold">Welcome to Expense tracker</p>
                 {!profile.isComplete && <p>Your profile is incomplete <span><Link to={'/updateprofile'}>Complete Now</Link></span></p>}
                 {profile.isComplete && profile.data &&
@@ -90,7 +96,10 @@ const ExpenseHome = () => {
                         <Link to={'/profilepage'}><p className="fw-bold fst-italic text-success mt-2 text-decoration-none">{profile.data.displayName}</p></Link>
                     </div>
                 }
+
+                  
             </div>
+            {total>10000 && <Premium/>}
 
             {!emailVerified && <div className="d-flex justify-content-end m-1">
                 <Button onClick={emailverifyHandler}>Verify Email</Button>

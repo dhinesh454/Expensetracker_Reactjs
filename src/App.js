@@ -6,13 +6,15 @@ import ExpenseHomePage from './components/Pages/ExpenseHomePage';
 import UpdateProfile from './components/Users/UpdateProfile';
 import ProfilePage from './components/Pages/ProfilePage';
 import ForgotPassword from './components/Users/ForgotPassword';
+import { useSelector } from 'react-redux';
 
 
 
 
 function App() {
+  const isDarkTheme = useSelector(state => state.expenses.isDarkTheme);
   return (
-
+<div className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
     <Router>
       <Switch>
         <Route exact path='/'>
@@ -42,7 +44,7 @@ function App() {
         
       </Switch>
     </Router>
-    
+  </div>  
   );
 }
 
